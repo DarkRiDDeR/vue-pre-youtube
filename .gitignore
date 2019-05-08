@@ -1,0 +1,36 @@
+# Logs
+logs
+*.log
+npm-debug.log
+selenium-debug.log
+npm-debug.log*
+
+# System
+.DS_Store
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Project
+.editorconfig
+
+# nyc test coverage
+.nyc_output
+
+# node-waf configuration
+.lock-wscript
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Package
+package-lock.json
+
+node_modules/
+.idea/
+.directory
