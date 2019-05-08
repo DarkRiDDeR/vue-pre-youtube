@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>Vue Pre Youtube</title>
+        <meta charset="utf-8">
+        <style>
+            html {
+                background-color: #DDD;
+                padding: 0;
+            }
+            body {
+                width: 920px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #FFF;
+            }
+            img {
+                max-width: 100%;
+            }
+            .not-bars {
+                display: inline-block;
+                overflow: hidden;
+            }
+            .not-bars img {
+                margin: -9.375% 0;
+            }
+        </style>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/DarkRiDDeR/vue-pre-youtube@master/dist/vue-pre-youtube.min.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>Vue Pre Youtube</h1>
+            <h2>Mode hover</h2>
+            <p>
+                <preyoutube id="RK1K2bCg4J8" />
+            </p>
+            <h2>Mode constant</h2>
+            <h3>Format default</h3>
+            <p>
+                <preyoutube id="RK1K2bCg4J8" mode="constant" format="default" />
+            </p>
+            <h3>Format 0</h3>
+            <p>
+                <preyoutube id="RK1K2bCg4J8" mode="constant" format="0" />
+            </p>
+            <h3>Format mqdefault</h3>
+            <p>
+                <preyoutube id="RK1K2bCg4J8" mode="constant" format="mqdefault" />
+            </p>
+            <h3>Format hqdefault</h3>
+            <p>
+                <preyoutube id="RK1K2bCg4J8" mode="constant" format="hqdefault" />
+            </p>
+            <h3>Format sddefault</h3>
+            <p>
+                <preyoutube id="RK1K2bCg4J8" mode="constant" format="sddefault" />
+            </p>
+            <h3>Format maxresdefault</h3>
+            <p>
+                <preyoutube id="RK1K2bCg4J8" mode="constant" format="maxresdefault" />
+            </p>
+            
+            <h1>Recipe for removing the 16×9 Bars</h1>
+            <p>
+                <div class="not-bars">
+                    <preyoutube id="RK1K2bCg4J8" mode="constant" format="hqdefault" />
+                </div>
+            </p>
+        </div>
+        <script>
+            var PreYoutube = VuePreYoutube.default;
+            console.log(VuePreYoutube);
+            console.log(PreYoutube);
+            
+            
+            var app = new Vue({
+                el: '#app',
+                components: {
+                    preyoutube: VuePreYoutube.default
+                }
+            });
+            
+        </script>
+    </body>
+</html>
