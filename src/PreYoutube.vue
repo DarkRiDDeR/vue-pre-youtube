@@ -11,14 +11,14 @@
 
 <script>
     export const modeTypes = {
-        constant: 0,
-        hover: 1
+        constant: "constant",
+        hover: "hover"
     };
     export const formatTypes = {
-        f0: 0, // 480 x 360
-        f1: 1, // 120 x 90
-        f2: 2, // 120 x 90
-        f3: 3, // 120 x 90
+        "0": 0, // 480 x 360
+        "1": 1, // 120 x 90
+        "2": 2, // 120 x 90
+        "3": 3, // 120 x 90
         default: "default", // 120 x 90
         mqdefault: "mqdefault", // 320 x 180
         hqdefault: "hqdefault", // 480 x 360
@@ -35,7 +35,7 @@
                 default: 500
             },
             mode: {
-                type: Number,
+                type: String,
                 default: modeTypes.hover
             },
             format: {
