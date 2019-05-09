@@ -4,8 +4,8 @@
             :alt="alt"
             :title="title"
             :class="imgClass"
-            @mouseenter="onMouseEnter()"
-            @mouseleave="onMouseLeave()"
+            @mouseenter="initHandler ? $emit('mouseenter') : ''"
+            @mouseleave="initHandler ? $emit('mouseleave') : ''"
     >
 </template>
 
@@ -42,6 +42,10 @@
                 type: String,
                 default: formatTypes.default
             },
+            initHandler: {
+                type: Boolean,
+                default: true,
+            },
             src: {
                 type: String,
                 default: ""
@@ -60,17 +64,17 @@
             },
             fnStart: {
                 type: Function,
-                default: function () {
-                    if (this.mode !== modeTypes.constant) {
-                        this.loop = setInterval(this.fnLoop, this.interval);
+                default: function (mode, setFramesInterval) {
+                    if (mode !== modeTypes.constant) {
+                        setFramesInterval();
                     }
                 }
             },
             fnStop: {
                 type: Function,
-                default: function () {
-                    if (this.mode !== modeTypes.constant) {
-                        clearInterval(this.loop);
+                default: function (mode, clearFramesInterval) {
+                    if (mode !== modeTypes.constant) {
+                        clearFramesInterval();
                     }
                 }
             },
@@ -78,11 +82,16 @@
         data() {
             return {
                 loop: null,
-                fnLoop: () => {
-                    if (++this.num > 3) {
-                        this.num = 1;
-                    }
-                    this.dataSrc = this.genUrl(this.id, this.num);
+                setFramesInterval: () => {
+                    this.loop = setInterval(() => {
+                        if (++this.num > 3) {
+                            this.num = 1;
+                        }
+                        this.dataSrc = this.genUrl(this.id, this.num);
+                    }, this.interval);
+                },
+                clearFramesInterval: () => {
+                    clearInterval(this.loop);
                 },
                 num: 0,
                 dataSrc: this.src
@@ -98,16 +107,17 @@
             if (this.mode === modeTypes.constant) {
                 this.dataSrc = this.genUrl(this.id, this.format);
             }
+
+            this.$on('mouseenter', () => {
+                this.fnStart(this.mode, this.setFramesInterval);
+            });
+            this.$on('mouseleave', () => {
+                this.fnStop(this.mode, this.clearFramesInterval);
+            });
         },
         methods: {
             genUrl(id, name) {
                 return "https://img.youtube.com/vi/" + id + "/" + name + ".jpg";
-            },
-            onMouseEnter() {
-                this.fnStart();
-            },
-            onMouseLeave() {
-                this.fnStop();
             }
         }
     };

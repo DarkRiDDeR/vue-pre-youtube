@@ -1,7 +1,7 @@
 {
   "name": "vue-pre-youtube",
-  "description": "A Vue.JS component for animating YouTube thumbnails",
-  "version": "0.1.1",
+  "description": "A Vue.JS component for displaying and  animating YouTube thumbnails",
+  "version": "0.2.0",
   "license": "MIT",
   "private": false,
   "author": {

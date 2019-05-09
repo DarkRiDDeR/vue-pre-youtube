@@ -5,16 +5,16 @@
 
 
 # Vue Pre Youtube
-A Vue.JS component for animating YouTube thumbnails.
+A Vue.JS component for displaying and  animating YouTube thumbnails
 
 ## Install
 Install module using npm:
 
-``npm install js-table-cell-selector``
+``npm install vue-pre-youtube``
 
 or using yarn:
 
-``yarn add js-table-cell-selector``
+``yarn add vue-pre-youtube``
 
 and import:
 
@@ -46,38 +46,37 @@ export default {
 
 ## Options
 
-| Name      | Type     | Default                    | Description                                   |
-|-----------|----------|----------------------------|-----------------------------------------------|
-| id        | String   | -                          | Id of video in Youtube                        |
-| interval  | Number   | 500                        | The number of milliseconds between frames     |
-| mode      | Number   | hover                      | Image change mode                             |
-| format    | String   | default                    | Image format type: size, resolition, bars     |
-| src       | String   | ""                         | The path to the first picture preview         |
-| imgClass  | String   | "pre-youtube"              | CSS class of image                            |
-| alt       | String   | ""                         | "alt" attribute of image                      |
-| title     | String   | ""                         | "title" attribute of image                    |
-| fnStart   | Function | <a href="#f1">Note 1</a>   | Start animation function frame                |
-| fnStop    | Function | <a href="#f1">Note 2</a>   | Stop animation function frame                 |
+| Name        | Type     | Default                    | Description                                   |
+|-------------|----------|----------------------------|-----------------------------------------------|
+| id          | String   | -                          | Id of video in Youtube                        |
+| interval    | Number   | 500                        | The number of milliseconds between frames     |
+| mode        | Number   | hover                      | Image change mode                             |
+| format      | String   | default                    | Image format type: size, resolition, bars     |
+| initHandler | Boolean  | true                       | Initialize event handlers                     /
+| src         | String   | ""                         | The path to the first picture preview         |
+| imgClass    | String   | "pre-youtube"              | CSS class of image                            |
+| alt         | String   | ""                         | "alt" attribute of image                      |
+| title       | String   | ""                         | "title" attribute of image                    |
+| fnStart     | Function | <a href="#f1">Note 1</a>   | Start animation function frame                |
+| fnStop      | Function | <a href="#f1">Note 2</a>   | Stop animation function frame                 |
 
 
 <a name="f1"></a> [Note 1] Function **fnStart**:
 ```javascript
-function () {
-    if (this.mode !== modeTypes.constant) {
-        this.loop = setInterval(this.fnLoop, this.interval);
+function (mode, setFramesInterval) {
+    if (mode !== modeTypes.constant) {
+        setFramesInterval();
     }
 }
-
 ```
 
 <a name="f2"></a>[Note 2] Function **fnStop**:
 ```javascript
-function () {
-    if (this.mode !== modeTypes.constant) {
-        clearInterval(this.loop);
+function (mode, clearFramesInterval) {
+    if (mode !== modeTypes.constant) {
+        clearFramesInterval();
     }
 }
-
 ```
 
 ### Mode types
@@ -109,6 +108,14 @@ When a video is uploaded to YouTube, YouTube will generate 3 thumbnails and desi
 | hqdefault 	| 480x360                                                                                              | High             | Yes       | Yes           |
 | sddefault 	| 640x480                                                                                              | High             | Yes       | Yes           |
 | maxresdefault | Matches the resolution of the uploaded video. **NOTE:** May not be available for non-highres videos. / Highest possible | No 	      | Yes           |
+	
+### Eents
+
+| Name       | Description                                             |
+|------------|---------------------------------------------------------|
+| mouseenter | Mouseenter event that triggers an animation             |
+| mouseleave | Mouseleave event that stops the animation               |
+
 	
 ## Recipe for removing the 16×9 Bars
 
